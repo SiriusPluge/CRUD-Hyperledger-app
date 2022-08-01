@@ -10,9 +10,6 @@ type ReqBody struct {
 
 // Конфигурация для BC
 type ConfigBC struct {
-	// MspID            string `json:"mspID"`
-	// CertPath         string `json:"certPath"`
-	// KeyPath          string `json:"keyPath"`
 	TlsCertPath   string `json:"tls_cert_path"`
 	PeerEndpoint  string `json:"peer_endpoint"`
 	GatewayPeer   string `json:"gateway_peer"`

@@ -28,6 +28,7 @@ func (s *Service) СreateService(body *models.ReqBody) error {
 		return errors.Wrap(err, "cannot create system user instance")
 	}
 	defer sys.Conn.Close()
+	defer sys.Gateway.Close()
 
 	servicesByte, err := json.Marshal(body.Services)
 	if err != nil {
@@ -50,6 +51,7 @@ func (s *Service) GetServiceByUUID(req *models.ReqBody) (*models.Services, error
 		return nil, errors.Wrap(err, "cannot get service user instance")
 	}
 	defer sys.Conn.Close()
+	defer sys.Gateway.Close()
 
 	resByte, err := sys.Contract.SubmitTransaction("GetServiceByUUID", req.InputType, req.InputPhone)
 	if err != nil {
@@ -72,6 +74,7 @@ func (s *Service) SetServiceStatus(req *models.ReqBody) error {
 		return errors.Wrap(err, "cannot get service user instance")
 	}
 	defer sys.Conn.Close()
+	defer sys.Gateway.Close()
 
 	_, err = sys.Contract.SubmitTransaction("SetServiceStatus", req.InputType, req.InputPhone, req.InputStatus)
 	if err != nil {
@@ -88,6 +91,7 @@ func (s *Service) WithDrawService(req *models.ReqBody) error {
 		return errors.Wrap(err, "cannot get service user instance")
 	}
 	defer sys.Conn.Close()
+	defer sys.Gateway.Close()
 
 	_, err = sys.Contract.SubmitTransaction("WithDrawService", req.InputType, req.InputPhone)
 	if err != nil {
@@ -104,6 +108,7 @@ func (s *Service) DeleteService(req *models.ReqBody) error {
 		return errors.Wrap(err, "cannot get service user instance")
 	}
 	defer sys.Conn.Close()
+	defer sys.Gateway.Close()
 
 	_, err = sys.Contract.SubmitTransaction("DeleteService", req.InputType, req.InputPhone)
 	if err != nil {

@@ -23,7 +23,6 @@ func CreateInstance(cfg *models.ConfigBC) (*Instance, error) {
 	if err != nil {
 		return nil, ErrorHandling(err)
 	}
-	// defer clientConnection.Close()
 
 	id := newIdentity(cfg)
 	sign := newSign(cfg)
@@ -42,7 +41,6 @@ func CreateInstance(cfg *models.ConfigBC) (*Instance, error) {
 	if err != nil {
 		panic(err)
 	}
-	// defer gateway.Close()
 
 	network := gateway.GetNetwork(cfg.ChannelName)
 	contract := network.GetContract(cfg.ChaincodeName)
