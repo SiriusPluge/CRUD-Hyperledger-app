@@ -24,6 +24,8 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		api.POST("/create_service", h.СreateService)        // Создание заявки на услугу
 		api.POST("/get_service", h.GetServiceByUUID)        // Получить данные по услуге
 		api.POST("/set_status_service", h.SetServiceStatus) // Установить статус
+		api.POST("/withdraw_service", h.WithDrawService)    // Отзыв заявки клиентом
+		api.POST("/delete_service", h.DeleteService)        // Удаление заявки
 	}
 
 	return router
