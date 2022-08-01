@@ -6,63 +6,11 @@ import (
 	"fmt"
 	"io/ioutil"
 	"path"
-	"time"
 
-	"github.com/hyperledger/fabric-gateway/pkg/client"
 	"github.com/hyperledger/fabric-gateway/pkg/identity"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 )
-
-// const (
-// 	mspID         = "Org1MSP"
-// 	pathBC        = "/home/pluge/go/src/github.com/SiriusPluge/fabric-samples/"
-// 	certPath      = pathBC + "test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/cert.pem"
-// 	keyPath       = pathBC + "test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore/"
-// 	tlsCertPath   = pathBC + "test-network/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt"
-// 	peerEndpoint  = "localhost:7051"
-// 	gatewayPeer   = "peer0.org1.example.com"
-// 	channelName   = "mychannel"
-// 	chaincodeName = "private"
-// )
-
-func Init(cfg *models.ConfigBC) (*Instance, error) {
-	// The gRPC client connection should be shared by all Gateway connections to this endpoint
-	clientConnection, err := newGrpcConnection(cfg)
-	if err != nil {
-		return nil, ErrorHandling(err)
-	}
-	// defer clientConnection.Close()
-
-	id := newIdentity(cfg)
-	sign := newSign(cfg)
-
-	// Create a Gateway connection for a specific client identity
-	gateway, err := client.Connect(
-		id,
-		client.WithSign(sign),
-		client.WithClientConnection(clientConnection),
-		// Default timeouts for different gRPC calls
-		client.WithEvaluateTimeout(5*time.Second),
-		client.WithEndorseTimeout(15*time.Second),
-		client.WithSubmitTimeout(5*time.Second),
-		client.WithCommitStatusTimeout(1*time.Minute),
-	)
-	if err != nil {
-		panic(err)
-	}
-	// defer gateway.Close()
-
-	network := gateway.GetNetwork(cfg.ChannelName)
-	contract := network.GetContract(cfg.ChaincodeName)
-
-	return &Instance{
-		Conn:     clientConnection,
-		Gateway:  gateway,
-		Signer:   sign,
-		Contract: contract,
-	}, nil
-}
 
 // newGrpcConnection creates a gRPC connection to the Gateway server.
 func newGrpcConnection(cfg *models.ConfigBC) (*grpc.ClientConn, error) {

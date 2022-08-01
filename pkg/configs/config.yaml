@@ -18,9 +18,9 @@ admin:
 
 ledger:
   mspID: Org1MSP
-  certPath: /home/pluge/go/src/github.com/SiriusPluge/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/cert.pem
-  keyPath: /home/pluge/go/src/github.com/SiriusPluge/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore/
-  tlsCertPath: /home/pluge/go/src/github.com/SiriusPluge/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
+  certPath: $HOME/go-projects/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/cert.pem
+  keyPath: $HOME/go-projects/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore/
+  tlsCertPath: $HOME/go-projects/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
   peerEndpoint: localhost:7051
   gatewayPeer: peer0.org1.example.com
   channelName: mychannel

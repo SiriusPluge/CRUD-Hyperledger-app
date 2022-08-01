@@ -14,13 +14,10 @@ type App interface {
 
 type Service struct {
 	App
-	Client *bcapi.Instance
 }
 
-func NewService(contract *bcapi.Instance) *Service {
-	return &Service{
-		Client: contract,
-	}
+func NewService() *Service {
+	return &Service{}
 }
 
 func (s *Service) СreateService(body *models.ReqBody) error {
