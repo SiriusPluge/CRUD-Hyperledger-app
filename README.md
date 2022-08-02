@@ -23,11 +23,6 @@ _________________
     - ```docker-compose up```
 
 ### Для тестирования приложения в корне папки проекта "CRUD-Hyperledger-app" будет расположена postman-коллекция.
-Перед отправлением запросов необходимо заполнить данные конфигурации:
-1) 
-
-
-sudo chown -R pluge:pluge ./organizations/peerOrganizations/org1.example.com/peers/
 
 ### Если вам встретятся ошибки следующего содержания, то необходимо:
-1) 
+1) ```Error: error getting endorser client for channel: endorser client failed to connect to localhost:7051: failed to create new connection: context deadline exceeded``` -> необходимо заменить версию couchdb 3.1.1 на 3.2 в файле ```./fabric-samples/test-network/compose/compose-couchdb.yaml.

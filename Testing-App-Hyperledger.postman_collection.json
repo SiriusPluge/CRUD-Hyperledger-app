@@ -1,0 +1,246 @@
+{
+	"info": {
+		"_postman_id": "e5db57d3-abe1-4e8f-89db-314465b13880",
+		"name": "Testing-App-Hyperledger",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16606430"
+	},
+	"item": [
+		{
+			"name": "Create Service User Org1(broker)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \n    \"config_bc\": {\n        \"tls_cert_path\": \"/app/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt\",\n        \"peer_endpoint\": \"localhost:7051\",\n        \"gateway_peer\": \"peer0.org1.example.com\",\n        \"channel_name\": \"mychannel\",\n        \"chaincode_name\": \"private\",\n        \"user_cert\": {\n        \"org_id\": \"Org1MSP\",\n        \"client_id\": \"\",\n        \"cert\": \"/app/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/cert.pem\",\n        \"priv\": \"/app/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore/\"\n        }\n    },\n    \"services\": {\n        \"type_services\": \"test\",\n        \"comment\": \"rest comment\",\n        \"email\": \"test@test\",\n        \"first_name\": \"test\",\n        \"last_name\": \"testovich\",\n        \"phone\": \"+71111111111\",\n        \"address\": \"test, test\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/api/create_service",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"create_service"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Service User Org2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \n    \"config_bc\": {\n        \"tls_cert_path\": \"/app/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt\",\n        \"peer_endpoint\": \"peer0.org1.example.com:7051\",\n        \"gateway_peer\": \"peer0.org1.example.com\",\n        \"channel_name\": \"mychannel\",\n        \"chaincode_name\": \"private\",\n        \"user_cert\": {\n        \"org_id\": \"Org2MSP\",\n        \"client_id\": \"\",\n        \"cert\": \"/app/fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/users/User1@org2.example.com/msp/signcerts/cert.pem\",\n        \"priv\": \"/app/fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/users/User1@org2.example.com/msp/keystore/\"\n        }\n    },\n    \"services\": {\n        \"type_services\": \"peer\",\n        \"comment\": \"rest comment\",\n        \"email\": \"test@test\",\n        \"first_name\": \"test\",\n        \"last_name\": \"testovich\",\n        \"phone\": \"+7999999999\",\n        \"address\": \"test, test\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/create_service",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"create_service"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetServiceByUUID",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \n    \"config_bc\": {\n        \"tls_cert_path\": \"/app/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt\",\n        \"peer_endpoint\": \"peer0.org1.example.com:7051\",\n        \"gateway_peer\": \"peer0.org1.example.com\",\n        \"channel_name\": \"mychannel\",\n        \"chaincode_name\": \"private\",\n        \"user_cert\": {\n        \"org_id\": \"Org2MSP\",\n        \"client_id\": \"\",\n        \"cert\": \"/app/fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/users/User1@org2.example.com/msp/signcerts/cert.pem\",\n        \"priv\": \"/app/fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/users/User1@org2.example.com/msp/keystore/\"\n        }\n    },\n    \"input_type\": \"peer\",\n    \"input_phone\": \"+7999999999\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/get_service/",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"get_service",
+						""
+					],
+					"query": [
+						{
+							"key": "type_service",
+							"value": "peer",
+							"disabled": true
+						},
+						{
+							"key": "phone",
+							"value": "+7999999999",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SetServiceStatus User Org2 [ERROR]",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \n    \"config_bc\": {\n        \"tls_cert_path\": \"/app/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt\",\n        \"peer_endpoint\": \"peer0.org1.example.com:7051\",\n        \"gateway_peer\": \"peer0.org1.example.com\",\n        \"channel_name\": \"mychannel\",\n        \"chaincode_name\": \"private\",\n        \"user_cert\": {\n        \"org_id\": \"Org2MSP\",\n        \"client_id\": \"\",\n        \"cert\": \"/app/fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/users/User1@org2.example.com/msp/signcerts/cert.pem\",\n        \"priv\": \"/app/fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/users/User1@org2.example.com/msp/keystore/\"\n        }\n    },\n    \"input_type\": \"peer\",\n    \"input_phone\": \"+7999999999\",\n    \"input_status\": \"3\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/set_status_service/",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"set_status_service",
+						""
+					],
+					"query": [
+						{
+							"key": "type_service",
+							"value": "peer",
+							"disabled": true
+						},
+						{
+							"key": "phone",
+							"value": "+7999999999",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "WithdrawService User Org2 [OK]",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \n    \"config_bc\": {\n        \"tls_cert_path\": \"/app/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt\",\n        \"peer_endpoint\": \"peer0.org1.example.com:7051\",\n        \"gateway_peer\": \"peer0.org1.example.com\",\n        \"channel_name\": \"mychannel\",\n        \"chaincode_name\": \"private\",\n        \"user_cert\": {\n        \"org_id\": \"Org2MSP\",\n        \"client_id\": \"\",\n        \"cert\": \"/app/fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/users/User1@org2.example.com/msp/signcerts/cert.pem\",\n        \"priv\": \"/app/fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/users/User1@org2.example.com/msp/keystore/\"\n        }\n    },\n    \"input_type\": \"peer\",\n    \"input_phone\": \"+7999999999\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/withdraw_service",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"withdraw_service"
+					],
+					"query": [
+						{
+							"key": "type_service",
+							"value": "peer",
+							"disabled": true
+						},
+						{
+							"key": "phone",
+							"value": "+7999999999",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SetServiceStatus User Org1 [OK]",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \n    \"config_bc\": {\n        \"tls_cert_path\": \"/app/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt\",\n        \"peer_endpoint\": \"peer0.org1.example.com:7051\",\n        \"gateway_peer\": \"peer0.org1.example.com\",\n        \"channel_name\": \"mychannel\",\n        \"chaincode_name\": \"private\",\n        \"user_cert\": {\n        \"org_id\": \"Org1MSP\",\n        \"client_id\": \"\",\n        \"cert\": \"/app/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/cert.pem\",\n        \"priv\": \"/app/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore/\"\n        }\n    },\n    \"input_type\": \"peer\",\n    \"input_phone\": \"+7999999999\",\n    \"input_status\": \"3\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/set_status_service/",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"set_status_service",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteService User Org1 [OK]",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \n    \"config_bc\": {\n        \"tls_cert_path\": \"/app/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt\",\n        \"peer_endpoint\": \"peer0.org1.example.com:7051\",\n        \"gateway_peer\": \"peer0.org1.example.com\",\n        \"channel_name\": \"mychannel\",\n        \"chaincode_name\": \"private\",\n        \"user_cert\": {\n        \"org_id\": \"Org1MSP\",\n        \"client_id\": \"\",\n        \"cert\": \"/app/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/cert.pem\",\n        \"priv\": \"/app/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore/\"\n        }\n    },\n    \"input_type\": \"peer\",\n    \"input_phone\": \"+7999999999\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/delete_service/",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"delete_service",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
